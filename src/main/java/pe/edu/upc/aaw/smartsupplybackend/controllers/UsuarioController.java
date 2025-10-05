@@ -37,7 +37,34 @@ public class UsuarioController {
         dS.insert(d);
     }
 
-    //ES PARA EL REGISTRAR SIN AUTENTICACION EN EL FRONT
+
+
+    @GetMapping
+    //@PreAuthorize("hasAuthority('user') or hasAuthority('admin')")
+    public List<UsuarioDTO> listar() {
+        return dS.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, UsuarioDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id) {
+        dS.delete(id);
+    }
+
+    /*
+        @DeleteMapping("/{id}")
+        public ResponseEntity<String> deleteUser(@PathVariable Long id){
+            dS.delete(id);
+            return ResponseEntity.ok("Usuario eliminado correctamente");
+        }*/ //ES PARA EL REGISTRAR SIN AUTENTICACION EN EL FRONT
+    @GetMapping("/{id}")
+    public UsuarioDTO listarId(@PathVariable("id") Long id) {
+        ModelMapper m = new ModelMapper();
+        UsuarioDTO d = m.map(dS.listid(id), UsuarioDTO.class);
+        return d;
+    }
     @PostMapping("/registerUser")
     public void registrarNuevo(@RequestBody UsuarioDTO dto) {
        /* ModelMapper m = new ModelMapper();
@@ -64,32 +91,6 @@ public class UsuarioController {
         tS.insert(rol);
     }
 
-    @GetMapping
-    //@PreAuthorize("hasAuthority('user') or hasAuthority('admin')")
-    public List<UsuarioDTO> listar() {
-        return dS.list().stream().map(x -> {
-            ModelMapper m = new ModelMapper();
-            return m.map(x, UsuarioDTO.class);
-        }).collect(Collectors.toList());
-    }
-
-    @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable Long id) {
-        dS.delete(id);
-    }
-
-    /*
-        @DeleteMapping("/{id}")
-        public ResponseEntity<String> deleteUser(@PathVariable Long id){
-            dS.delete(id);
-            return ResponseEntity.ok("Usuario eliminado correctamente");
-        }*/
-    @GetMapping("/{id}")
-    public UsuarioDTO listarId(@PathVariable("id") Long id) {
-        ModelMapper m = new ModelMapper();
-        UsuarioDTO d = m.map(dS.listid(id), UsuarioDTO.class);
-        return d;
-    }
    /* @PutMapping
     public ResponseEntity<String>modificar(@RequestBody UsuarioDTO dto)
     {

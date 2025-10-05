@@ -17,8 +17,7 @@ public class UsuarioDTO {
     private Long ageUsuario;
     private Long dniUsuario;
 
-    private Double creditUsuario;
-    private Double creditUsuarioAvailable;
+
     public Long getIdUsuario() {
         return idUsuario;
     }
@@ -83,19 +82,5 @@ public class UsuarioDTO {
         this.dniUsuario = dniUsuario;
     }
 
-    public Double getCreditUsuario() {
-        return creditUsuario;
-    }
 
-    public void setCreditUsuario(Double creditUsuario) {
-        this.creditUsuario = creditUsuario;
-    }
-
-    public Double getCreditUsuarioAvailable() {
-        return creditUsuarioAvailable;
-    }
-
-    public void setCreditUsuarioAvailable(Double creditUsuarioAvailable) {
-        this.creditUsuarioAvailable = creditUsuarioAvailable;
-    }
 }

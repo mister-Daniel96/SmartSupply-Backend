@@ -20,18 +20,12 @@ public class Usuario {
 
     @Column(name = "enabledUsuario",nullable = false)
     private Boolean enabledUsuario;
-    @Column (name = "streetUsuario",nullable = false)
+    @Column (name = "streetUsuario",nullable = true)
     private String streetUsuario;
-    @Column(name="ageUsuario")
+    @Column(name="ageUsuario", nullable=true)
     private Long ageUsuario;
-    @Column (name = "dniUsuario",nullable = false,length = 45)
+    @Column (name = "dniUsuario",nullable = true,length = 45)
     private Long dniUsuario;
-    @Column (name= "creditUsuario", nullable = false)
-    private Double creditUsuario;
-
-
-    @Column (name= "creditUsuarioAvailable")
-    private Double creditUsuarioAvailable;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -42,7 +36,7 @@ public class Usuario {
 
     public Usuario(Long idUsuario, String nameUsuario, String passwordUsuario, String emailUsuario,
                    Boolean enabledUsuario, String streetUsuario, Long ageUsuario,
-                   Long dniUsuario, Double creditUsuario, Double creditUsuarioAvailable,Double saldoUsuario,
+                   Long dniUsuario,
                    List<TypeUser> roles) {
         this.idUsuario = idUsuario;
         this.nameUsuario = nameUsuario;
@@ -52,8 +46,6 @@ public class Usuario {
         this.streetUsuario = streetUsuario;
         this.ageUsuario = ageUsuario;
         this.dniUsuario = dniUsuario;
-        this.creditUsuario = creditUsuario;
-        this.creditUsuarioAvailable = creditUsuarioAvailable;
         this.roles = roles;
 
     }
@@ -131,19 +123,5 @@ public class Usuario {
         this.dniUsuario = dniUsuario;
     }
 
-    public Double getCreditUsuario() {
-        return creditUsuario;
-    }
 
-    public void setCreditUsuario(Double creditUsuario) {
-        this.creditUsuario = creditUsuario;
-    }
-
-    public Double getCreditUsuarioAvailable() {
-        return creditUsuarioAvailable;
-    }
-
-    public void setCreditUsuarioAvailable(Double creditUsuarioAvailable) {
-        this.creditUsuarioAvailable = creditUsuarioAvailable;
-    }
 }
