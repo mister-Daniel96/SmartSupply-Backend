@@ -13,11 +13,22 @@ public class UsuarioDTO {
 
     private Boolean enabledUsuario;
 
-    private String streetUsuario;
+
+
+    private String rolUsuario;
+
     private Long ageUsuario;
     private Long dniUsuario;
 
+    private String phoneUsuario;
 
+    public String getPhoneUsuario() {
+        return phoneUsuario;
+    }
+
+    public void setPhoneUsuario(String phoneUsuario) {
+        this.phoneUsuario = phoneUsuario;
+    }
     public Long getIdUsuario() {
         return idUsuario;
     }
@@ -58,13 +69,6 @@ public class UsuarioDTO {
         this.enabledUsuario = enabledUsuario;
     }
 
-    public String getStreetUsuario() {
-        return streetUsuario;
-    }
-
-    public void setStreetUsuario(String streetUsuario) {
-        this.streetUsuario = streetUsuario;
-    }
 
     public Long getAgeUsuario() {
         return ageUsuario;
@@ -81,6 +85,12 @@ public class UsuarioDTO {
     public void setDniUsuario(Long dniUsuario) {
         this.dniUsuario = dniUsuario;
     }
+    public String getRolUsuario() {
+        return rolUsuario;
+    }
 
+    public void setRolUsuario(String rolUsuario) {
+        this.rolUsuario = rolUsuario;
+    }
 
 }

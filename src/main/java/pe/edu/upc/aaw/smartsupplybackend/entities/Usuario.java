@@ -18,10 +18,16 @@ public class Usuario {
     @Column(name = "emailUsuario", nullable = false, length = 50)
     private String emailUsuario;
 
+
+
+    @Column(name = "phoneUsuario", nullable = false, length = 50)
+    private String phoneUsuario;
+
+
+    @Column(name = "rolUsuario", nullable = false, length = 50)
+    private String rolUsuario;
     @Column(name = "enabledUsuario",nullable = false)
     private Boolean enabledUsuario;
-    @Column (name = "streetUsuario",nullable = true)
-    private String streetUsuario;
     @Column(name="ageUsuario", nullable=true)
     private Long ageUsuario;
     @Column (name = "dniUsuario",nullable = true,length = 45)
@@ -35,19 +41,19 @@ public class Usuario {
     }
 
     public Usuario(Long idUsuario, String nameUsuario, String passwordUsuario, String emailUsuario,
-                   Boolean enabledUsuario, String streetUsuario, Long ageUsuario,
-                   Long dniUsuario,
+                   Boolean enabledUsuario, Long ageUsuario, String rolUsuario,
+                   Long dniUsuario, String phoneUsuario,
                    List<TypeUser> roles) {
         this.idUsuario = idUsuario;
         this.nameUsuario = nameUsuario;
         this.passwordUsuario = passwordUsuario;
         this.emailUsuario = emailUsuario;
         this.enabledUsuario = enabledUsuario;
-        this.streetUsuario = streetUsuario;
         this.ageUsuario = ageUsuario;
         this.dniUsuario = dniUsuario;
+        this.rolUsuario=rolUsuario;
         this.roles = roles;
-
+this.phoneUsuario=phoneUsuario;
     }
 
 
@@ -99,13 +105,6 @@ public class Usuario {
         this.roles = roles;
     }
 
-    public String getStreetUsuario() {
-        return streetUsuario;
-    }
-
-    public void setStreetUsuario(String streetUsuario) {
-        this.streetUsuario = streetUsuario;
-    }
 
     public Long getAgeUsuario() {
         return ageUsuario;
@@ -122,6 +121,19 @@ public class Usuario {
     public void setDniUsuario(Long dniUsuario) {
         this.dniUsuario = dniUsuario;
     }
+    public String getRolUsuario() {
+        return rolUsuario;
+    }
 
+    public void setRolUsuario(String rolUsuario) {
+        this.rolUsuario = rolUsuario;
+    }
+    public String getPhoneUsuario() {
+        return phoneUsuario;
+    }
+
+    public void setPhoneUsuario(String phoneUsuario) {
+        this.phoneUsuario = phoneUsuario;
+    }
 
 }
