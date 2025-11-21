@@ -19,7 +19,7 @@ public class Articulo {
     @Column(name="estadoArticulo",length = 100)
     private Boolean estadoArticulo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idCategoria", nullable = false)
     private Categoria categoria;
 

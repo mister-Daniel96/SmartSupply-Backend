@@ -2,25 +2,25 @@ package pe.edu.upc.aaw.smartsupplybackend.serviceImplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.aaw.smartsupplybackend.entities.Support;
-import pe.edu.upc.aaw.smartsupplybackend.repositories.ISupportRepository;
-import pe.edu.upc.aaw.smartsupplybackend.serviceInterfaces.ISupportService;
+import pe.edu.upc.aaw.smartsupplybackend.entities.Soporte;
+import pe.edu.upc.aaw.smartsupplybackend.repositories.ISoporteRepository;
+import pe.edu.upc.aaw.smartsupplybackend.serviceInterfaces.ISoporteService;
 
 import java.util.List;
 
 @Service
-public class SupportServiceImplement implements ISupportService {
+public class SoporteServiceImplement implements ISoporteService {
 
     @Autowired
-    private ISupportRepository dR;
+    private ISoporteRepository dR;
 
     @Override
-    public void insert(Support support) {
+    public void insert(Soporte support) {
         dR.save(support);
     }
 
     @Override
-    public List<Support> list() {
+    public List<Soporte> list() {
         return dR.findAll();
     }
 
@@ -30,8 +30,8 @@ public class SupportServiceImplement implements ISupportService {
     }
 
     @Override
-    public Support listId(int idSupport) {
-        return dR.findById(idSupport).orElse(new Support());
+    public Soporte listId(int idSupport) {
+        return dR.findById(idSupport).orElse(new Soporte());
     }
 
     @Override

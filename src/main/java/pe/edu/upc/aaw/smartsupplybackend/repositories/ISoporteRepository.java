@@ -3,12 +3,12 @@ package pe.edu.upc.aaw.smartsupplybackend.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pe.edu.upc.aaw.smartsupplybackend.entities.Support;
+import pe.edu.upc.aaw.smartsupplybackend.entities.Soporte;
 
 import java.util.List;
 
 @Repository
-public interface ISupportRepository extends JpaRepository<Support,Integer> {
+public interface ISoporteRepository extends JpaRepository<Soporte,Integer> {
 
 
     @Query(value = "SELECT\n" +

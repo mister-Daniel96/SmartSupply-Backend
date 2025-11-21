@@ -3,39 +3,38 @@ package pe.edu.upc.aaw.smartsupplybackend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.aaw.smartsupplybackend.dtos.SupportDTO;
-import pe.edu.upc.aaw.smartsupplybackend.entities.Support;
-import pe.edu.upc.aaw.smartsupplybackend.serviceInterfaces.ISupportService;
+import pe.edu.upc.aaw.smartsupplybackend.dtos.SoporteDTO;
+import pe.edu.upc.aaw.smartsupplybackend.entities.Soporte;
+import pe.edu.upc.aaw.smartsupplybackend.serviceInterfaces.ISoporteService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/supports")
-public class SupportController {
+@RequestMapping("/soportes")
+public class SoporteController {
     @Autowired
-    private ISupportService dS;
+    private ISoporteService dS;
 
     @PostMapping//es para  crear
-    public void registrar(@RequestBody SupportDTO dto) {
+    public void registrar(@RequestBody SoporteDTO dto) {
         ModelMapper m = new ModelMapper();
-        Support p = m.map(dto, Support.class);
+        Soporte p = m.map(dto, Soporte.class);
         dS.insert(p);
     }
     @GetMapping//es para retornar
     //@PreAuthorize("hasAuthority('user') or hasAuthority('admin')")
-    public List<SupportDTO> listar() {
+    public List<SoporteDTO> listar() {
         return dS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
-            return m.map(x, SupportDTO.class);
+            return m.map(x, SoporteDTO.class);
         }).collect(Collectors.toList());
     }
 
     @PutMapping// es para modificar
-    public void modificar(@RequestBody SupportDTO dto){
+    public void modificar(@RequestBody SoporteDTO dto){
         ModelMapper m=new ModelMapper();
-        Support d=m.map(dto,Support.class);
+        Soporte d=m.map(dto,Soporte.class);
         dS.insert(d);
     }
     @DeleteMapping("/{id}")//es para borrar
@@ -44,29 +43,29 @@ public class SupportController {
     }
 
     @GetMapping("/{id}")
-    public SupportDTO listarId(@PathVariable("id") Integer id){
+    public SoporteDTO listarId(@PathVariable("id") Integer id){
         //usamos el @PathVariable porque se usara una variable
         ModelMapper m=new ModelMapper();
-        SupportDTO d=m.map(dS.listId(id),SupportDTO.class);
+        SoporteDTO d=m.map(dS.listId(id), SoporteDTO.class);
         return d;
     }
 
     //  ============   REPORTE DE JUAN
 
 /*
-    @GetMapping("/supportMes")
-    List<CantidadSupportMesDTO> cantidadSupportMesDTOS(){
+    @GetMapping("/SoporteMes")
+    List<CantidadSoporteMesDTO> cantidadSoporteMesDTOS(){
        List<String[]> lista= dS.inciddenciasXMes();
 
-       List<CantidadSupportMesDTO>listaDTO=new ArrayList<>();
+       List<CantidadSoporteMesDTO>listaDTO=new ArrayList<>();
 
        for (String[]data:lista){
-           CantidadSupportMesDTO dto=new CantidadSupportMesDTO();
+           CantidadSoporteMesDTO dto=new CantidadSoporteMesDTO();
 
 
            dto.setYear(Integer.parseInt(data[0]));
            dto.setMonth(data[1]);
-           dto.setQuantitySupports(Integer.parseInt(data[2]));
+           dto.setQuantitySoportes(Integer.parseInt(data[2]));
 
            listaDTO.add(dto);
        }
