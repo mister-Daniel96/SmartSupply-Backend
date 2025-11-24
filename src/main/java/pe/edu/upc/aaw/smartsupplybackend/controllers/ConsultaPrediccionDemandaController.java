@@ -37,43 +37,34 @@ public class ConsultaPrediccionDemandaController {
 
 
         ModelMapper m = new ModelMapper();
-        // 1. Mapear DTO -> entidad y guardar cabecera
         ConsultaPrediccionDemanda consulta = m.map(dto, ConsultaPrediccionDemanda.class);
-        cS.insert(consulta); // aquí ya debería generarse el idConsulta
+        cS.insert(consulta);
 
 
-        // 2. Armar request para el modelo de ML (FastAPI)
         PredictionRequestDTO p = new PredictionRequestDTO();
         p.setFechaInicio(dto.getFechaInicio());
         p.setFechaFin(dto.getFechaFin());
         p.setTipoArticuloName(dto.getArticulo().getNombreArticulo());
-        // asumimos que nombreArticulo = "Technology", "Furniture", etc.
         System.out.println(p);
-        // 3. Llamar al modelo y obtener la respuesta
         PredictionResponseDTO response = pC.predecir(p);
 
-        // 4. Guardar cada día de la predicción en HistorialDemanda
         if (response != null && response.getPredictions() != null) {
             for (PredictionResponseDTO.PrediccionDiaDTO dia : response.getPredictions()) {
 
                 HistorialDemanda h = new HistorialDemanda();
 
-                // Relación con la cabecera de consulta
                 h.setConsulta(consulta);
 
-                // Relación con artículo (usamos el mismo artículo de la consulta)
                 h.setArticulo(consulta.getArticulo());
 
-                // Datos de la predicción
-                h.setFecha(dia.getFecha());                      // fecha predicha
-                h.setCantidad(dia.getDemandaPronosticada());     // demanda del modelo
-                h.setTipoRegistro("PREDICCION");                 // marca que es predicción
+                h.setFecha(dia.getFecha());
+                h.setCantidad(dia.getDemandaPronosticada());
+                h.setTipoRegistro("PREDICCION");
 
                 hS.insert(h);
             }
         }
 
-        // 5. Devolver al front las predicciones
         return response;
     }
 

@@ -68,18 +68,32 @@ public class UsuarioController {
     }
     @PostMapping("/registerUser")
     public void registrarNuevo(@RequestBody UsuarioDTO dto) {
-       /* ModelMapper m = new ModelMapper();
-        Usuario d = m.map(dto, Usuario.class);
-        dS.insert(d);
-        TypeUser rol=new TypeUser();
-        rol.setTypeTypeUser("user");
-        rol.setUser(d);
-        tS.insert(rol);*/
+        ModelMapper m = new ModelMapper();
+
+        // 1. Mapear DTO → Entidad
+        Usuario usuario = m.map(dto, Usuario.class);
+
+        // 2. Guardar usuario y obtener el usuario ya persistido
+        Usuario usuarioGuardado = dS.insert(usuario);
+
+        // 3. Crear el rol asociado usando el usuario guardado
+        TypeUser rol = new TypeUser();
+        rol.setTypeTypeUser("CLIENTE"); // valor por defecto, similar a annuities/condición
+        rol.setUser(usuarioGuardado);
+        tS.insert(rol);
+
+        // 4. Log simple (como el System.out del ejemplo de crédito)
+        System.out.println(usuarioGuardado);
+    }
+
+    /*
+    @PostMapping("/registerUser")
+    public void registrarNuevo(@RequestBody UsuarioDTO dto) {
+
 
         ModelMapper m = new ModelMapper();
         Usuario usuario = m.map(dto, Usuario.class);
 
-        // Insertar el usuario en la base de datos
         dS.insert(usuario);
 
         // Recargar el usuario desde la base de datos para obtener una instancia gestionada
@@ -91,6 +105,7 @@ public class UsuarioController {
         rol.setUser(usuarioGestionado.get(0));
         tS.insert(rol);
     }
+    */
 
    /* @PutMapping
     public ResponseEntity<String>modificar(@RequestBody UsuarioDTO dto)

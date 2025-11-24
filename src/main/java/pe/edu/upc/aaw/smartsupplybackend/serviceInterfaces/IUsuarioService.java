@@ -6,7 +6,7 @@ import pe.edu.upc.aaw.smartsupplybackend.entities.Usuario;
 import java.util.List;
 
 public interface IUsuarioService {
-    public void insert(Usuario usuario);
+    public Usuario insert(Usuario usuario);
     public List<Usuario> list();
     public void delete(Long idUsuario);
     public Usuario listid(Long idUsuario);

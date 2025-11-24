@@ -16,8 +16,8 @@ public class UsuarioServiceImplement implements IUsuarioService
     private IUsuarioRepository dR;
 
     @Override
-    public void insert(Usuario usuario) {
-        dR.save(usuario);
+    public Usuario insert(Usuario usuario) {
+       return dR.save(usuario);
     }
 
     @Override
